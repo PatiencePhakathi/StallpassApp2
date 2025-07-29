@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'DepartmentAnnoucementsPage.dart';
 import 'SignUpPage.dart';
+import 'HomePage.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -8,8 +8,9 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 25.0),
         child: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -18,7 +19,7 @@ class LoginPage extends StatelessWidget {
                 Container(
                   height: 150,
                   decoration: const BoxDecoration(
-                    color: Color(0xFF3F51B5), // Blue Header
+                    color: Color(0xFF3F51B5),
                     borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(50),
                     ),
@@ -27,7 +28,7 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 40),
                 TextField(
                   decoration: const InputDecoration(
-                    labelText: 'Username',
+                    labelText: 'User Name',
                     border: OutlineInputBorder(),
                   ),
                 ),
@@ -37,7 +38,6 @@ class LoginPage extends StatelessWidget {
                   decoration: const InputDecoration(
                     labelText: 'Enter Your Password',
                     border: OutlineInputBorder(),
-                    suffixIcon: Icon(Icons.visibility),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -48,7 +48,7 @@ class LoginPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => const DepartmentAnnouncementsPage()),
+                        MaterialPageRoute(builder: (_) => const HomePage()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -61,7 +61,7 @@ class LoginPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Don't have an Account? "),
+                    const Text("Don't have an account? "),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -70,7 +70,7 @@ class LoginPage extends StatelessWidget {
                         );
                       },
                       child: const Text(
-                        'Sign up',
+                        'Sign Up',
                         style: TextStyle(
                           color: Colors.blue,
                           decoration: TextDecoration.underline,
@@ -79,7 +79,6 @@ class LoginPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
               ],
             ),
           ),
