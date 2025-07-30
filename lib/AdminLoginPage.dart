@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class AdminLoginPage extends StatefulWidget {
+  const AdminLoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<AdminLoginPage> createState() => _AdminLoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _AdminLoginPageState extends State<AdminLoginPage> {
   bool _obscurePassword = true;
-  String? _selectedOption;
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +21,32 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               height: 200,
               decoration: const BoxDecoration(
-                color: Color(0xFF4A3AFF), // Purple
+                color: Color(0xFF4A3AFF),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(80),
                 ),
               ),
+              child: const Center(
+                child: Text(
+                  "Admin Login",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
 
             // Username field
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: 'Username',
+                  hintText: 'Admin Username',
+                  prefixIcon: const Icon(Icons.person),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -53,7 +63,8 @@ class _LoginPageState extends State<LoginPage> {
               child: TextField(
                 obscureText: _obscurePassword,
                 decoration: InputDecoration(
-                  hintText: 'Enter Your Password',
+                  hintText: 'Password',
+                  prefixIcon: const Icon(Icons.lock),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _obscurePassword
@@ -74,40 +85,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
 
-            const SizedBox(height: 12),
-
-            // Dropdown for admin login
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                  hintText: "More Options",
-                ),
-                value: _selectedOption,
-                items: [
-                  'Admin Login',
-                ].map((option) {
-                  return DropdownMenuItem<String>(
-                    value: option,
-                    child: Text(option),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedOption = value;
-                  });
-                  if (value == 'Admin Login') {
-                    Navigator.pushNamed(context, '/adminLogin');
-                  }
-                },
-              ),
-            ),
-
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
 
             // Login button
             Padding(
@@ -123,9 +101,12 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   onPressed: () {
-                    // TODO: Implement login logic
+                    // TODO: Admin login logic
                   },
-                  child: const Text("Login"),
+                  child: const Text(
+                    "Log In",
+                    style: TextStyle(fontSize: 16),
+                  ),
                 ),
               ),
             ),
