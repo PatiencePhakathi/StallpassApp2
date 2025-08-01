@@ -4,7 +4,7 @@ import 'DepartmentAnnoucementsPage.dart';
 import 'NotificationPage.dart';
 import 'SuccessPage.dart';
 import 'ProfileSettingsPage.dart';
-import 'events_screen.dart';
+import 'ScanQrCode.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('StallPass Event App'),
-        backgroundColor: Color(0xFF3F51B5),
+        backgroundColor: const Color(0xFF3F51B5),
       ),
       drawer: Drawer(
         child: ListView(
@@ -29,62 +29,43 @@ class HomePage extends StatelessWidget {
                 style: TextStyle(color: Colors.white, fontSize: 24),
               ),
             ),
-            ListTile(
-              title: const Text('Upcoming Events'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => EventsScreen(),
-                  ),
-                );
-              },
-            ),
+            // Existing menu items
             ListTile(
               title: const Text('Department Announcements'),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const DepartmentAnnouncementsPage(),
-                  ),
-                );
+                _navigateTo(context, const DepartmentAnnouncementsPage());
               },
             ),
             ListTile(
               title: const Text('Notifications'),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const NotificationPage()),
-                );
+                _navigateTo(context, const NotificationPage());
               },
             ),
             ListTile(
               title: const Text('Success Page'),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const SuccessPage()),
-                );
+                _navigateTo(context, const SuccessPage());
               },
             ),
             ListTile(
               title: const Text('Attendance Profile'),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const AttendancePage()),
-                );
+                _navigateTo(context, const AttendancePage());
               },
             ),
             ListTile(
               title: const Text('Profile Settings'),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const ProfileSettingsPage()),
-                );
+                _navigateTo(context, const ProfileSettingsPage());
+              },
+            ),
+            // New QR Scanner menu item
+            ListTile(
+              leading: const Icon(Icons.qr_code_scanner, color: Color(0xFF3F51B5)),
+              title: const Text('Scan QR Code'),
+              onTap: () {
+                _navigateTo(context, const QRScannerPage());
               },
             ),
           ],
@@ -106,6 +87,15 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  // Helper method for navigation to prevent code duplication
+  void _navigateTo(BuildContext context, Widget page) {
+    Navigator.pop(context); // Close the drawer first
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => page),
     );
   }
 }
