@@ -4,6 +4,7 @@ import 'DepartmentAnnoucementsPage.dart';
 import 'NotificationPage.dart';
 import 'SuccessPage.dart';
 import 'ProfileSettingsPage.dart';
+import 'events_screen.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -27,6 +28,17 @@ class HomePage extends StatelessWidget {
                 'Menu',
                 style: TextStyle(color: Colors.white, fontSize: 24),
               ),
+            ),
+            ListTile(
+              title: const Text('Upcoming Events'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => EventsScreen(),
+                  ),
+                );
+              },
             ),
             ListTile(
               title: const Text('Department Announcements'),
