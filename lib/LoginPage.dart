@@ -1,137 +1,115 @@
 import 'package:flutter/material.dart';
+import 'SignUpPage.dart';
+import 'HomePage.dart';
+import 'AdminLoginPage.dart'; // <-- add this
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  bool _obscurePassword = true;
-  String? _selectedOption;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Purple wavy header
-            Container(
-              height: 200,
-              decoration: const BoxDecoration(
-                color: Color(0xFF4A3AFF), // Purple
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(80),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            // Username field
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Username',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // Password field
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: TextField(
-                obscureText: _obscurePassword,
-                decoration: InputDecoration(
-                  hintText: 'Enter Your Password',
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _obscurePassword
-                          ? Icons.visibility_off
-                          : Icons.visibility,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25.0),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(height: 50),
+                Container(
+                  height: 150,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF3F51B5),
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(50),
                     ),
+                  ),
+                ),
+                const SizedBox(height: 40),
+                TextField(
+                  decoration: const InputDecoration(
+                    labelText: 'User Name',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextField(
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    labelText: 'Enter Your Password',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  height: 45,
+                  child: ElevatedButton(
                     onPressed: () {
-                      setState(() {
-                        _obscurePassword = !_obscurePassword;
-                      });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const HomePage()),
+                      );
                     },
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 12),
-
-            // Dropdown for admin login
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                  hintText: "More Options",
-                ),
-                value: _selectedOption,
-                items: [
-                  'Admin Login',
-                ].map((option) {
-                  return DropdownMenuItem<String>(
-                    value: option,
-                    child: Text(option),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedOption = value;
-                  });
-                  if (value == 'Admin Login') {
-                    Navigator.pushNamed(context, '/adminLogin');
-                  }
-                },
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            // Login button
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: SizedBox(
-                width: double.infinity,
-                height: 48,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF4A3AFF),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue[800],
                     ),
+                    child: const Text('Login'),
                   ),
-                  onPressed: () {
-                    // TODO: Implement login logic
-                  },
-                  child: const Text("Login"),
                 ),
-              ),
+                const SizedBox(height: 20),
+                // Student sign-up row
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Don't have an account? "),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const SignUpPage()),
+                        );
+                      },
+                      child: const Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                // Admin login link
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Are you an admin? "),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const AdminLoginPage()),
+                        );
+                      },
+                      child: const Text(
+                        'Admin Login',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
   }
-}//end
+}

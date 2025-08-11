@@ -101,7 +101,9 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                     ),
                   ),
                   onPressed: () {
-                    // TODO: Admin login logic
+                    // TODO: Implement admin login logic here
+                    // For now, just print or navigate somewhere
+                    print('Admin Login pressed');
                   },
                   child: const Text(
                     "Log In",
@@ -115,4 +117,4 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
       ),
     );
   }
-}//
+}
