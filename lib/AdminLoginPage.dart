@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'admin_sign_up_page.dart';
 
 class AdminLoginPage extends StatefulWidget {
   const AdminLoginPage({super.key});
@@ -67,9 +68,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                   prefixIcon: const Icon(Icons.lock),
                   suffixIcon: IconButton(
                     icon: Icon(
-                      _obscurePassword
-                          ? Icons.visibility_off
-                          : Icons.visibility,
+                      _obscurePassword ? Icons.visibility_off : Icons.visibility,
                     ),
                     onPressed: () {
                       setState(() {
@@ -102,7 +101,6 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                   ),
                   onPressed: () {
                     // TODO: Implement admin login logic here
-                    // For now, just print or navigate somewhere
                     print('Admin Login pressed');
                   },
                   child: const Text(
@@ -111,6 +109,33 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                   ),
                 ),
               ),
+            ),
+
+            const SizedBox(height: 20),
+
+            // Link to Sign Up page
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Don't have an account? "),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AdminSignUpPage(),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    "Sign Up",
+                    style: TextStyle(
+                      color: Color(0xFF4A3AFF),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
