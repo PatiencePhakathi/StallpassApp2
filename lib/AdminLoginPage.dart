@@ -1,142 +1,95 @@
 import 'package:flutter/material.dart';
-import 'admin_sign_up_page.dart';
 
-class AdminLoginPage extends StatefulWidget {
+class AdminLoginPage extends StatelessWidget {
   const AdminLoginPage({super.key});
 
   @override
-  State<AdminLoginPage> createState() => _AdminLoginPageState();
-}
-
-class _AdminLoginPageState extends State<AdminLoginPage> {
-  bool _obscurePassword = true;
-
-  @override
   Widget build(BuildContext context) {
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Purple wavy header
-            Container(
-              height: 200,
-              decoration: const BoxDecoration(
-                color: Color(0xFF4A3AFF),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(80),
-                ),
+            const Text("Welcome Back!",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 20),
+
+            // Email Field
+            TextField(
+              controller: emailController,
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.email),
+                labelText: "Email",
+                border: OutlineInputBorder(),
               ),
-              child: const Center(
-                child: Text(
-                  "Admin Login",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+            ),
+            const SizedBox(height: 15),
+
+            // Password Field
+            TextField(
+              controller: passwordController,
+              obscureText: true,
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.lock),
+                labelText: "Password",
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 10),
+
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {},
+                child: const Text("Forgot Password?"),
               ),
             ),
 
-            const SizedBox(height: 30),
-
-            // Username field
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Admin Username',
-                  prefixIcon: const Icon(Icons.person),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                ),
+            // Sign In Button
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(double.infinity, 50),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
               ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // Password field
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: TextField(
-                obscureText: _obscurePassword,
-                decoration: InputDecoration(
-                  hintText: 'Password',
-                  prefixIcon: const Icon(Icons.lock),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _obscurePassword = !_obscurePassword;
-                      });
-                    },
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 30),
-
-            // Login button
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: SizedBox(
-                width: double.infinity,
-                height: 48,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF4A3AFF),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  onPressed: () {
-                    // TODO: Implement admin login logic here
-                    print('Admin Login pressed');
-                  },
-                  child: const Text(
-                    "Log In",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
-              ),
+              child: const Text("Sign In"),
             ),
 
             const SizedBox(height: 20),
+            const Text("or"),
+            const SizedBox(height: 10),
 
-            // Link to Sign Up page
+            // Social Logins
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Icon(Icons.g_mobiledata, size: 40),
+                SizedBox(width: 20),
+                Icon(Icons.apple, size: 40),
+                SizedBox(width: 20),
+                Icon(Icons.facebook, size: 40),
+              ],
+            ),
+            const SizedBox(height: 20),
+
+            // Navigate to Sign Up
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Don't have an account? "),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AdminSignUpPage(),
-                      ),
-                    );
+                const Text("Don’t have an account?"),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/signup');
                   },
-                  child: const Text(
-                    "Sign Up",
-                    style: TextStyle(
-                      color: Color(0xFF4A3AFF),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  child: const Text("Sign Up"),
                 ),
               ],
-            ),
+            )
           ],
         ),
       ),
